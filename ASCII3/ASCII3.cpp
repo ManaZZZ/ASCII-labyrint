@@ -5,12 +5,15 @@
 #include <string>
 #include <locale>
 #include <cstdlib>
+#include <cmath>
 
 //ANSI escape codes för färger
 #define RESET "\033[0m"
 #define RED "\033[31m"
 #define YELLOW "\033[33m"
 #define BLUE "\033[34m"
+#define GREEN "\033[32m"
+
 //de olika spelplanerna
 char map1[21][21] = {
     { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '1' },
@@ -81,8 +84,8 @@ char map3[21][21] = {
     { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
 };
 
-//currentMapay för meny och shop
-std::string guiArr[6][2] = {
+//arrays för meny, shop och svårhetsgrad
+std::string menuArr[6][2] = {
     {" ", " Campaign "},
     {" ", " Map 1 "},
     {" ", " Map 2 "},
@@ -97,12 +100,83 @@ std::string shopArr[3][2] = {
     {" ", "§ 30$ "}
 };
 
-
+std::string difficultyArr[5][2] = {
+    {" ", "\033[32mEasy\033[0m "},
+    {" ", "\033[33mNormal\033[0m "},
+    {" ", "\033[38;5;202mHard\033[0m "},
+    {" ", "\033[31mImpossible\033[0m "},
+    {" ", "\033[1;35m???\033[0m "}
+};
 //använder ansi koder för att rensa skärmen, mycket snabbare än system("cls")
 void clearScreen() {
     std::cout << "\033[2J";
     std::cout << "\033[H";
 }
+
+void closeAll(bool& menuOpen, bool& shopOpen, bool& difficultyScreenOpen) {
+    menuOpen = false;
+    shopOpen = false;
+    difficultyScreenOpen = false;
+}
+
+//skriver ut svårhetsgradsmenyn
+void printDifficultyScreen(std::string difficultyArr[5][2], int playerY, char currentPlayerIcon) {
+    std::string text = "Difficulty level:\n";
+    for (int j = 0; j < 5; j++) {
+        if (j == playerY) text += currentPlayerIcon;
+        text += difficultyArr[j][0];
+        text += difficultyArr[j][1];
+        text += "\n";
+    }
+    std::cout << text;
+}
+
+//flyttar runt pekaren på svårhetsgradsmenyn
+void moveDifficultyScreen(int& playerY, bool& difficultyScreenOpen, int& visionRange, bool& menuOpen, bool& shopOpen) {
+    char ch = _getch(); //kollar vilken piltangent som blir klickad och lagrar i key
+    switch (ch) {
+    case 72: //upp
+        playerY--;
+        break;
+    case 80: //ner
+        playerY++;
+        break;
+    case 'e': //går tillbaka
+        difficultyScreenOpen = false;
+        menuOpen = true;
+        shopOpen = false;
+        clearScreen();
+        break;
+    case 13: //enter
+        if (playerY == 0) { //easy
+            visionRange = 21;
+            closeAll(menuOpen, shopOpen, difficultyScreenOpen);
+            break;
+        }
+        if (playerY == 1) { //normal
+            visionRange = 9;
+            closeAll(menuOpen, shopOpen, difficultyScreenOpen);
+            break;
+        }
+        if (playerY == 2) { //hard
+            visionRange = 6;
+            closeAll(menuOpen, shopOpen, difficultyScreenOpen);
+            break;
+        }
+        if (playerY == 3) { //impossible
+            visionRange = 3;
+            closeAll(menuOpen, shopOpen, difficultyScreenOpen);
+            break;
+        }
+        if (playerY == 4) { //???
+            visionRange = 0;
+            closeAll(menuOpen, shopOpen, difficultyScreenOpen);
+            break;
+        }
+    }
+    
+}
+
 
 //hanterar hur man går 
 void shopMove(int& playerY, int& money, bool& shopOpen, char& defaultPlayerIcon) {
@@ -190,7 +264,7 @@ void generateMoneyOnMap(char map[21][21], char moneyChar) {
     }
 }
 
-//använder en funktion för att printa pengar på varje spelplan
+//använder en funktion för att ta bort alla pengar om det finns och sedan printa pengar på varje spelplan igen
 void printMoneyOnMap(char map1[21][21], char map2[21][21], char map3[21][21], char moneyChar) {
     printNoMoneyOnMap(map1, map2, map3, moneyChar);
     generateMoneyOnMap(map1, moneyChar);
@@ -199,7 +273,7 @@ void printMoneyOnMap(char map1[21][21], char map2[21][21], char map3[21][21], ch
 }
 
 //funktion för att visa menyn
-void guiPrint(const std::string currentMap[5][2], int playerY, char currentPlayerIcon) {
+void menuPrint(const std::string currentMap[5][2], int playerY, char currentPlayerIcon) {
 
     std::string text = "Press Enter to select\n";
     for (int j = 0; j < 6; j++) {
@@ -277,7 +351,7 @@ void mapMove(int& playerX, int& playerY, int& moves, bool& menuOpen, bool& quit,
 }
 
 //flyttar runt pilen i menyn
-void guiMove(const char (*currentMap)[21], int& playerY, int& mapLevel, int lives, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime, int moves, double score, bool& menuOpen, bool& quit, bool& singleMap, bool& shopOpen) {
+void menuMoveAndMath(const char (*currentMap)[21], int& playerY, int& mapLevel, int lives, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime, int moves, double score, bool& menuOpen, bool& quit, bool& singleMap, bool& shopOpen, bool& difficultyScreenOpen) {
     char ch = _getch(); //kollar vilken piltangent som blir klickad och lagrar i key
     switch (ch) {
     case 72: //upp
@@ -294,6 +368,7 @@ void guiMove(const char (*currentMap)[21], int& playerY, int& mapLevel, int live
         if (playerY == 0) { //start
             resetStats(mapLevel, lives, startTime, moves, score);
             menuOpen = false;
+            difficultyScreenOpen = true;
             break;
         }
         if (playerY == 1) { //map1
@@ -302,6 +377,7 @@ void guiMove(const char (*currentMap)[21], int& playerY, int& mapLevel, int live
             currentMap = map1;
             singleMap = true;
             menuOpen = false;
+            difficultyScreenOpen = true;
             break;
         }
         if (playerY == 2) { //map2
@@ -310,6 +386,7 @@ void guiMove(const char (*currentMap)[21], int& playerY, int& mapLevel, int live
             currentMap = map2;
             singleMap = true;
             menuOpen = false;
+            difficultyScreenOpen = true;
             break;
         }
         if (playerY == 3) { //map3
@@ -318,6 +395,7 @@ void guiMove(const char (*currentMap)[21], int& playerY, int& mapLevel, int live
             currentMap = map3;
             singleMap = true;
             menuOpen = false;
+            difficultyScreenOpen = true;
             break;
         }
 
@@ -347,7 +425,7 @@ void maxMovesCheck(int& moves, int& mapLevel, int& lives, std::chrono::time_poin
 
 
 //skriver ut kartan i konsollen
-void printMap(const char (*currentMap)[21], int playerX, int playerY, char& currentPlayerIcon, char defaultPlayerIcon, char moneyChar) {
+void printMap(const char (*currentMap)[21], int playerX, int playerY, char& currentPlayerIcon, char defaultPlayerIcon, char moneyChar, int visionRange) {
     currentPlayerIcon = defaultPlayerIcon;
     std::string printMap = "";
 
@@ -360,25 +438,35 @@ void printMap(const char (*currentMap)[21], int playerX, int playerY, char& curr
                 printMap += RESET;
             }
             else if (currentMap[i][j] == moneyChar) {
-                printMap += YELLOW;
-                printMap += moneyChar;
-                printMap += RESET;
+                if (((abs(i - playerY) <= visionRange) && (abs(j - playerX) <= visionRange))) {
+                    printMap += YELLOW;
+                    printMap += moneyChar;
+                    printMap += RESET;
+                }
+                else printMap += ' ';
             }
             else if (currentMap[i][j] == '#') {
-                printMap += BLUE;
-                printMap += currentMap[i][j];
-                printMap += RESET;
+                if (((abs(i - playerY) <= visionRange) && (abs(j - playerX) <= visionRange))) {
+                    printMap += BLUE;
+                    printMap += currentMap[i][j];
+                    printMap += RESET;
+                }
+                else printMap += ' ';
             }
             else {
-                printMap += currentMap[i][j];
+                if (((abs(i - playerY) <= visionRange) && (abs(j - playerX) <= visionRange))) {
+                    printMap += currentMap[i][j];
+                }
+                else printMap += ' ';
             }
             printMap += ' ';
         }
         printMap += '\n';
     }
+    
     std::cout << printMap;
+    std::cout << "\033[H";
 }
-
 
 //funktion för att skriva ut alla kartor
 void printStats(int mapLevel, int lives, int time, int moves, double score, int money) {
@@ -422,10 +510,9 @@ void moneyCheck(int playerX, int playerY, char moneyChar, int& money, char map1[
 }
 
 int main() {
-    SetConsoleCP(437);
-    SetConsoleOutputCP(437);
-
+    std::cout << "\033[?25l";
     srand(time(0));
+    int visionRange = 21;
     int maxMoves = 300;
     int playerX = 1, playerY = 1;
     int mapLevel = 1;
@@ -439,6 +526,7 @@ int main() {
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
     bool menuOpen = true;
     bool shopOpen = false;
+    bool difficultyScreenOpen = false;
     bool quit = false;
     bool singleMap = false;
     char currentPlayerIcon = 'o';
@@ -451,6 +539,29 @@ int main() {
         oldX = playerX;
         oldY = playerY;
 
+        if (difficultyScreenOpen == true) {
+            clearScreen();
+            currentPlayerIcon = '>';
+            std::cout << "\033[H";
+            playerY = 0;
+            while (difficultyScreenOpen == true) {
+                oldY = playerY;
+                printDifficultyScreen(difficultyArr, playerY, currentPlayerIcon);
+                moveDifficultyScreen(playerY, difficultyScreenOpen, visionRange, menuOpen, shopOpen);
+                if (playerY < 0) playerY = oldY;
+                if (playerY > 4) playerY = oldY;
+                std::cout << "\033[H";
+            }
+            resetStartPos(playerX, playerY);
+
+            currentPlayerIcon = defaultPlayerIcon;
+            system("cls");
+            closeAll(menuOpen, shopOpen, difficultyScreenOpen);
+            resetStats(mapLevel, lives, startTime, moves, score);
+            resetStartPos(playerX, playerY);
+            startTime = std::chrono::high_resolution_clock::now();
+            printMoneyOnMap(map1, map2, map3, moneyChar);
+        }
         //om shoppen ska öppnas körs koden för shoppen
         if (shopOpen == true) {
             clearScreen();
@@ -474,12 +585,12 @@ int main() {
             clearScreen();
             shopOpen = false;
             menuOpen = true;
-
-
+            difficultyScreenOpen = false;
         }
 
         //när menyn ska vara öppen körs en del av koden som bara är till för menyn
         if (menuOpen == true) {
+            clearScreen();
             currentPlayerIcon = '>';
             std::cout << "\033[H";
             playerY = 0;
@@ -487,8 +598,8 @@ int main() {
             while (menuOpen == true) {
                 oldY = playerY;
 
-                guiPrint(guiArr, playerY, currentPlayerIcon);
-                guiMove(currentMap, playerY, mapLevel, lives, startTime, moves, score, menuOpen, quit, singleMap, shopOpen);
+                menuPrint(menuArr, playerY, currentPlayerIcon);
+                menuMoveAndMath(currentMap, playerY, mapLevel, lives, startTime, moves, score, menuOpen, quit, singleMap, shopOpen, difficultyScreenOpen);
 
                 if (mapLevel == 1) {
                     currentMap = map1;
@@ -507,18 +618,10 @@ int main() {
                 std::cout << "\033[H";
             }
 
-            resetStartPos(playerX, playerY);
-            startTime = std::chrono::high_resolution_clock::now();
-
-
-            if (menuOpen == false && shopOpen == false) {
-                clearScreen();
-
-                printStats(mapLevel, lives, duration.count(), moves, score, money);
-                printMap(currentMap, playerX, playerY, currentPlayerIcon, defaultPlayerIcon, moneyChar);
-            }
-            printMoneyOnMap(map1, map2, map3, moneyChar);
+            
         }
+
+        
 
         //kollar om en tangent trycks annars fortsätter programmet
         mapMove(playerX, playerY, moves, menuOpen, quit, mapLevel, lives, score, startTime);
@@ -534,11 +637,11 @@ int main() {
         duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
 
         //skriver ut spelplanen
-        if (menuOpen == false && shopOpen == false) {
+        if ((menuOpen == false) && (shopOpen == false) && (difficultyScreenOpen == false)) {
             Sleep(10);
             std::cout << "\033[H";
             printStats(mapLevel, lives, duration.count(), moves, score, money);
-            printMap(currentMap, playerX, playerY, currentPlayerIcon, defaultPlayerIcon, moneyChar);
+            printMap(currentMap, playerX, playerY, currentPlayerIcon, defaultPlayerIcon, moneyChar, visionRange);
         }
 
         //om tiden når 100 ska spelet avslutas
@@ -563,7 +666,9 @@ int main() {
             Sleep(2000);
             std::cout << "\033[H";
             resetStats(mapLevel, lives, startTime, moves, score);
+            difficultyScreenOpen = false;
             menuOpen = true;
+            visionRange = 21;
             printNoMoneyOnMap(map1, map2, map3, moneyChar);
         }
 
@@ -610,8 +715,10 @@ int main() {
                 std::cout << score;
                 Sleep(3000);
                 clearScreen();
+                resetStats(mapLevel, lives, startTime, moves, score);
                 menuOpen = true;
             }
+
             //sätter tillbaka spelaren på startpositionen
             resetStartPos(playerX, playerY);
         }
