@@ -488,22 +488,64 @@ void wallCheck(const char (*currentMap)[21], int& playerX, int& playerY, int old
 }
 
 //kollar om spelaren står på en peng
-void moneyCheck(int playerX, int playerY, char moneyChar, int& money, char map1[21][21], char map2[21][21], char map3[21][21], int mapLevel) {
+void moneyCheck(int playerX, int playerY, char moneyChar, int& money, char map1[21][21], char map2[21][21], char map3[21][21], int mapLevel, int visionRange) {
     if (mapLevel == 1) {
         if (map1[playerY][playerX] == moneyChar) {
-            money++;
+            if (visionRange == 21) {
+                money++;
+            }
+            else if (visionRange == 9) {
+                money += 2;
+            }
+            else if (visionRange == 6) {
+                money += 3;
+            }
+            else if (visionRange == 3) {
+                money += 4;
+            }
+            else if (visionRange == 0) {
+                money += 5;
+            }
             map1[playerY][playerX] = ' ';
         }
     }
     else if (mapLevel == 2) {
         if (map2[playerY][playerX] == moneyChar) {
-            money++;
+            if (visionRange == 21) {
+                money++;
+            }
+            else if (visionRange == 9) {
+                money += 2;
+            }
+            else if (visionRange == 6) {
+                money += 3;
+            }
+            else if (visionRange == 3) {
+                money += 4;
+            }
+            else if (visionRange == 0) {
+                money += 5;
+            }
             map2[playerY][playerX] = ' ';
         }
     }
     else if (mapLevel == 3) {
         if (map3[playerY][playerX] == moneyChar) {
-            money++;
+            if (visionRange == 21) {
+                money++;
+            }
+            else if (visionRange == 9) {
+                money += 2;
+            }
+            else if (visionRange == 6) {
+                money += 3;
+            }
+            else if (visionRange == 3) {
+                money += 4;
+            }
+            else if (visionRange == 0) {
+                money += 5;
+            }
             map3[playerY][playerX] = ' ';
         }
     }
@@ -617,8 +659,6 @@ int main() {
                 if (playerY > 5) playerY = oldY;
                 std::cout << "\033[H";
             }
-
-            
         }
 
         
@@ -630,7 +670,7 @@ int main() {
         wallCheck(currentMap, playerX, playerY, oldX, oldY, lives, currentPlayerIcon);
 
         //money check
-        moneyCheck(playerX, playerY, moneyChar, money, map1, map2, map3, mapLevel);
+        moneyCheck(playerX, playerY, moneyChar, money, map1, map2, map3, mapLevel, visionRange);
 
         //räknar tiden 
         endTime = std::chrono::high_resolution_clock::now();
