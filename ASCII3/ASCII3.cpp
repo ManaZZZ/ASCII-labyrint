@@ -86,27 +86,27 @@ std::string map3[21][21] = {
 };
 
 //arrays för meny, shop och svårighetsgrad
-std::string menuArr[6][2] = {
-    {" ", " Campaign "},
-    {" ", " Map 1 "},
-    {" ", " Map 2 "},
-    {" ", " Map 3 "},
-    {" ", " Shop "},
-    {" ", " Quit "}
+std::string menuArr[6] = {
+    {" Campaign "},
+    {" Map 1 "},
+    {" Map 2 "},
+    {" Map 3 "},
+    {" Shop "},
+    {" Quit "}
 };
 
-std::string shopArr[3][2] = {
-    {" ", "* 10$ "},
-    {" ", "¤ 20$ "},
-    {" ", "§ 30$ "}
+std::string shopArr[3] = {
+    {"* 10$ "},
+    {"¤ 20$ "},
+    {"§ 30$ "}
 };
 
-std::string difficultyArr[5][2] = {
-    {" ", "\033[32mEasy\033[0m "},
-    {" ", "\033[33mNormal\033[0m "},
-    {" ", "\033[38;5;202mHard\033[0m "},
-    {" ", "\033[31mImpossible\033[0m "},
-    {" ", "\033[1;35m???\033[0m "}
+std::string difficultyArr[5] = {
+    {"\033[32mEasy\033[0m "},
+    {"\033[33mNormal\033[0m "},
+    {"\033[38;5;202mHard\033[0m "},
+    {"\033[31mImpossible\033[0m "},
+    {"\033[1;35m???\033[0m "}
 };
 
 
@@ -146,6 +146,7 @@ void clearMoneyFromMapGlobal(std::string map1[21][21], std::string map2[21][21],
 
 //ändrar kartorna för att sätta ut pengar på kartan
 void generateMoneyOnMap(std::string map[21][21], std::string moneyChar) {
+    //Går igenom varje koordinat på spelplanen och sätter en peng där med 5% chans
     for (int i = 0; i < 21; i++) {
         for (int j = 0; j < 21; j++) {
             if (map[i][j] == " ") {
@@ -160,8 +161,8 @@ void generateMoneyOnMap(std::string map[21][21], std::string moneyChar) {
 
 //använder en funktion för att ta bort alla pengar om det finns och sedan printa pengar på varje spelplan igen
 void printMoneyOnMapGobal(std::string map1[21][21], std::string map2[21][21], std::string map3[21][21], std::string moneyChar) {
-    clearMoneyFromMapGlobal(map1, map2, map3, moneyChar);
-    generateMoneyOnMap(map1, moneyChar);
+    clearMoneyFromMapGlobal(map1, map2, map3, moneyChar);   //Tar bort om det finns pengar från tidigare spel
+    generateMoneyOnMap(map1, moneyChar);                    //Sätter ut pengar på kartorna
     generateMoneyOnMap(map2, moneyChar);
     generateMoneyOnMap(map3, moneyChar);
 }
@@ -184,14 +185,19 @@ void resetStartPos(int& playerX, int& playerY) {
 }
 
 
-
 //skriver ut svårighetsgradsmenyn
-void printDifficultyScreen(std::string difficultyArr[5][2], int playerY, std::string currentPlayerIcon) {
+void printDifficultyScreen(std::string difficultyArr[5], int playerY, std::string currentPlayerIcon) {
     std::string text = "Difficulty level:\n";
     for (int j = 0; j < 5; j++) {
-        if (j == playerY) text += currentPlayerIcon;
-        text += difficultyArr[j][0];
-        text += difficultyArr[j][1];
+        if (j == playerY) {                     //Kollar y-nivån för pekaren för att skriva ut det markerade innehållet i färg
+            text += "\033[38;2;255;105;180m> \033[0m";
+            text += difficultyArr[j];
+            text += "\033[38;2;255;105;180m< \033[0m";
+        }
+        else {                                  //Annars skrivs ut utan färg
+            text += difficultyArr[j];
+            text += "   ";
+        }
         text += "\n";
     }
     std::cout << text;
@@ -251,20 +257,26 @@ void moveDifficultyScreen(int& playerY, bool& difficultyScreenOpen, int& visionR
 
 }
 
-
-
 //skriver ut shoppen 
-void printShop(std::string shopArr[3][2], int playerY, std::string currentPlayerIcon, int money) {
-
+void printShop(std::string shopArr[3], int playerY, std::string currentPlayerIcon, int money) {
     std::string text = "Press Enter to select\n";
     text += "Money: ";
     text += std::to_string(money);
     text += "$ ";
     text += "\n";
     for (int j = 0; j < 3; j++) {
-        if (j == playerY) text += currentPlayerIcon;
-        text += shopArr[j][0];
-        text += shopArr[j][1];
+        if (j == playerY) {                     //Kollar y-nivån för pekaren för att skriva ut det markerade innehållet i färg
+            text += "\033[38;2;255;105;180m";   //ändrar texten till rosa
+            text += "> ";
+            text += shopArr[j];
+            text += "<";
+            text += "\033[0m";                  //Återställer färgen
+        }
+        else {                                  //Annars skrivs shoppen ut utan färg
+            text += shopArr[j];
+            text += "   ";
+        }
+
         text += "\n";
     }
     std::cout << text;
@@ -400,7 +412,7 @@ void moveMap(int& playerX, int& playerY, int& moves, bool& menuOpen, bool& endCo
             playerX--;
             moves++;
             break;
-        case 'e':
+        case 'e': //återställer stats och öppnar menyn
             resetStats(mapLevel, lives, startTime, moves, score);
             clearScreen();
             menuOpen = true;
@@ -415,18 +427,18 @@ void moveMap(int& playerX, int& playerY, int& moves, bool& menuOpen, bool& endCo
 
 
 //Lagar menyn i en string mha en for-loop 
-void printMenu(const std::string currentMap[6][2], int playerY, std::string currentPlayerIcon) {
+void printMenu(const std::string currentMap[6], int playerY) {
     std::string text = "Press Enter to select\n";
     for (int j = 0; j < 6; j++) {
         if (j == playerY) {
-            text += "\033[38;2;255;105;180m";
-            text += currentPlayerIcon;
-            text += currentMap[j][1];
+            text += "\033[38;2;255;105;180m";   //Ändrar färg på pekaren
+            text += ">";                        //Lägger till pekare på höger och vänster sida om texten
+            text += currentMap[j];
             text += "<";
-            text += "\033[0m";
+            text += "\033[0m";                  //Återställer färgen
         }
         else {
-            text += currentMap[j][1];
+            text += currentMap[j];
             text += "   ";
         }
         text += "\n";
@@ -696,7 +708,7 @@ int main() {
             while (menuOpen == true) {      //Kör menyn tills annat anges
                 oldY = playerY;             //Skriver ut och flyttar runt menyn
                 
-                printMenu(menuArr, playerY, currentPlayerIcon);
+                printMenu(menuArr, playerY);
                 moveMenu(currentMap, playerY, mapLevel, lives, startTime, moves, score, menuOpen, endConsole, singleMap, shopOpen, difficultyScreenOpen);
 
                 
