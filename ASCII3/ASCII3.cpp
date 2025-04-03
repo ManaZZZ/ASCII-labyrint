@@ -13,78 +13,79 @@
 #define YELLOW "\033[33m"
 #define BLUE "\033[34m"
 #define GREEN "\033[32m"
+#define BLUE_BG "\033[44m"
 
 //de olika spelplanerna
-char map1[21][21] = {
-    { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '1' },
-    { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#' },
-    { '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
+std::string map1[21][21] = {
+    { "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "1"},
+    { "#", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#", " ", " ", " ", "#" },
+    { "#", "#", "#", " ", "#", " ", "#", "#", "#", " ", "#", " ", "#", "#", "#", " ", "#", " ", "#", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", " ", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", "#", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", " ", "#", "#", "#", "#", " ", "#", " ", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", "#", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#", " ", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", " ", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#", " ", "#", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", " ", "#", "#" },
+    { "#", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", "#", " ", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", "#", " ", "#", "#" },
+    { "#", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", "#", "#", "#", " ", "#", " ", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#" },
+    { "#", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", "#", "#", "#", " ", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "E", "#" }
 };
 
-char map2[21][21] = {
-    { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '2' },
-    { '#', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#' },
-    { '#', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#' },
-    { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#' },
-    { '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
+std::string map2[21][21] = {
+    { "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "2"},
+    { "#", " ", " ", " ", " ", "#", "#", "#", " ", " ", " ", "#", " ", " ", " ", " ", "#", " ", " ", " ", "#" },
+    { "#", "#", "#", " ", " ", "#", " ", "#", " ", "#", " ", "#", " ", "#", "#", " ", "#", " ", "#", "#", "#" },
+    { "#", " ", " ", " ", "#", " ", " ", "#", " ", "#", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", " ", "#", "#", "#", "#", " ", "#", " ", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", " ", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#", " ", "#", "#", "#" },
+    { "#", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", " ", "#", "#" },
+    { "#", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", "#", " ", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", "#", " ", "#", "#" },
+    { "#", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", "#", "#", "#", " ", "#", " ", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#" },
+    { "#", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "E", "#"}
 };
 
-char map3[21][21] = {
-    { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '3' },
-    { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', ' ', '#' },
-    { '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#', '#' },
-    { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', '#', '#' },
-    { '#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#' },
-    { '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', ' ', '#' },
-    { '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#' },
-    { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-    { '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#' },
-    { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
+std::string map3[21][21] = {
+    { "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "3"},
+    { "#", " ", " ", " ", "#", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", "#", "#", " ", "#", " ", "#", "#", " ", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", " ", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", "#", " ", "#" },
+    { "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", " ", "#", " ", " ", " ", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", "#", "#", " ", "#", "#" },
+    { "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", "#", " ", " ", " ", " ", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", "#", "#", "#", "#", "#", "#" },
+    { "#", " ", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", " ", "#", " ", " ", " ", " ", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", "#", "#", "#", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", "#", "#", "#", "#", "#" },
+    { "#", " ", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", " ", " ", " ", "#" },
+    { "#", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", "#", " ", "#" },
+    { "#", " ", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", " ", " ", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", "#", "#", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", " ", " ", " ", "#" },
+    { "#", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#" },
+    { "#", " ", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", " ", " ", "#" },
+    { "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "E", "#"}
 };
 
-//arrays för meny, shop och svårhetsgrad
+//arrays för meny, shop och svårighetsgrad
 std::string menuArr[6][2] = {
     {" ", " Campaign "},
     {" ", " Map 1 "},
@@ -107,20 +108,85 @@ std::string difficultyArr[5][2] = {
     {" ", "\033[31mImpossible\033[0m "},
     {" ", "\033[1;35m???\033[0m "}
 };
+
+
+
 //använder ansi koder för att rensa skärmen, mycket snabbare än system("cls")
 void clearScreen() {
     std::cout << "\033[2J";
     std::cout << "\033[H";
 }
 
+//stänger alla menyer
 void closeAll(bool& menuOpen, bool& shopOpen, bool& difficultyScreenOpen) {
     menuOpen = false;
     shopOpen = false;
     difficultyScreenOpen = false;
 }
 
-//skriver ut svårhetsgradsmenyn
-void printDifficultyScreen(std::string difficultyArr[5][2], int playerY, char currentPlayerIcon) {
+
+
+//tar bort alla pengar från kartan efter att en spelare har dött eller förlorat
+void removeMoneyFromMap(std::string map[21][21], std::string moneyChar) {
+    for (int i = 0; i < 21; i++) {
+        for (int j = 0; j < 21; j++) {
+            if (map[i][j] == moneyChar) map[i][j] = " ";
+        }
+    }
+}
+
+//Kör removeMoneyFromMap en gång för varje karta
+void clearMoneyFromMapGlobal(std::string map1[21][21], std::string map2[21][21], std::string map3[21][21], std::string moneyChar) {
+    removeMoneyFromMap(map1, moneyChar);
+    removeMoneyFromMap(map2, moneyChar);
+    removeMoneyFromMap(map3, moneyChar);
+}
+
+
+
+//ändrar kartorna för att sätta ut pengar på kartan
+void generateMoneyOnMap(std::string map[21][21], std::string moneyChar) {
+    for (int i = 0; i < 21; i++) {
+        for (int j = 0; j < 21; j++) {
+            if (map[i][j] == " ") {
+                int randNum = rand() % 20 + 1;
+                if (randNum == 1) { 
+                    map[i][j] = moneyChar;
+                }
+            }
+        }
+    }
+}
+
+//använder en funktion för att ta bort alla pengar om det finns och sedan printa pengar på varje spelplan igen
+void printMoneyOnMapGobal(std::string map1[21][21], std::string map2[21][21], std::string map3[21][21], std::string moneyChar) {
+    clearMoneyFromMapGlobal(map1, map2, map3, moneyChar);
+    generateMoneyOnMap(map1, moneyChar);
+    generateMoneyOnMap(map2, moneyChar);
+    generateMoneyOnMap(map3, moneyChar);
+}
+
+
+
+//återställer moves, time etc
+void resetStats(int& mapLevel, int& health, std::chrono::time_point<std::chrono::high_resolution_clock>& time, int& moves, double& score) {
+    mapLevel = 1;
+    health = 3;
+    time = std::chrono::high_resolution_clock::now();  // Reset time
+    moves = 0;
+    score = 0;
+}
+
+//återställer positionen för spelaren
+void resetStartPos(int& playerX, int& playerY) {
+    playerX = 1;
+    playerY = 1;
+}
+
+
+
+//skriver ut svårighetsgradsmenyn
+void printDifficultyScreen(std::string difficultyArr[5][2], int playerY, std::string currentPlayerIcon) {
     std::string text = "Difficulty level:\n";
     for (int j = 0; j < 5; j++) {
         if (j == playerY) text += currentPlayerIcon;
@@ -131,14 +197,20 @@ void printDifficultyScreen(std::string difficultyArr[5][2], int playerY, char cu
     std::cout << text;
 }
 
-//flyttar runt pekaren på svårhetsgradsmenyn
-void moveDifficultyScreen(int& playerY, bool& difficultyScreenOpen, int& visionRange, bool& menuOpen, bool& shopOpen) {
-    char ch = _getch(); //kollar vilken piltangent som blir klickad och lagrar i key
-    switch (ch) {
+//flyttar runt pekaren på svårighetsgradmenyn och hanterar i/o för menyn
+void moveDifficultyScreen(int& playerY, bool& difficultyScreenOpen, int& visionRange, bool& menuOpen, bool& shopOpen, bool& endConsole) {
+    char keyPressed = _getch(); //kollar vilken piltangent som blir klickad och lagrar i keyPressed
+    switch (keyPressed) {
     case 72: //upp
         playerY--;
         break;
+    case 'w': 
+        playerY--;
+        break;
     case 80: //ner
+        playerY++;
+        break;
+    case 's':
         playerY++;
         break;
     case 'e': //går tillbaka
@@ -147,6 +219,8 @@ void moveDifficultyScreen(int& playerY, bool& difficultyScreenOpen, int& visionR
         shopOpen = false;
         clearScreen();
         break;
+    case 'q':
+        endConsole = true;
     case 13: //enter
         if (playerY == 0) { //easy
             visionRange = 21;
@@ -174,24 +248,49 @@ void moveDifficultyScreen(int& playerY, bool& difficultyScreenOpen, int& visionR
             break;
         }
     }
-    
+
 }
 
 
-//hanterar hur man går 
-void shopMove(int& playerY, int& money, bool& shopOpen, char& defaultPlayerIcon) {
-    char ch = _getch(); //kollar vilken piltangent som blir klickad och lagrar i key
-    switch (ch) {
+
+//skriver ut shoppen 
+void printShop(std::string shopArr[3][2], int playerY, std::string currentPlayerIcon, int money) {
+
+    std::string text = "Press Enter to select\n";
+    text += "Money: ";
+    text += std::to_string(money);
+    text += "$ ";
+    text += "\n";
+    for (int j = 0; j < 3; j++) {
+        if (j == playerY) text += currentPlayerIcon;
+        text += shopArr[j][0];
+        text += shopArr[j][1];
+        text += "\n";
+    }
+    std::cout << text;
+}
+
+//hanterar hur man förflyttar pekaren i menyn och vad som händer när man klickar
+void moveShop(int& playerY, int& money, bool& shopOpen, std::string& defaultPlayerIcon) {
+    char keyPressed = _getch(); //kollar vilken piltangent som blir klickad och lagrar i keyPressed
+    switch (keyPressed) {
     case 72: //upp
         playerY--;
         break;
+    case 'w':
+        playerY--;
+        break;
     case 80: //ner
+        playerY++;
+        break;
+    case 's':
         playerY++;
         break;
     case 'e': //går ut ur shoppen
         shopOpen = false;
         break;
     case 13: //enter
+        //kollar y-värdet för pekaren och ger en ny karaktär om tillräckligt med pengar finns
         if (playerY == 0) { //första karaktären
             if (money >= 10) {
                 defaultPlayerIcon = '*';
@@ -216,95 +315,59 @@ void shopMove(int& playerY, int& money, bool& shopOpen, char& defaultPlayerIcon)
     }
 }
 
-//printar shopen
-void printShop(std::string shopArr[3][2], int playerY, char currentPlayerIcon, int money) {
 
-    std::string text = "Press Enter to select\n";
-    text += "Money: ";
-    text += std::to_string(money);
-    text += "$ ";
-    text += "\n";
-    for (int j = 0; j < 3; j++) {
-        if (j == playerY) text += currentPlayerIcon;
-        text += shopArr[j][0];
-        text += shopArr[j][1];
-        text += "\n";
-    }
-    std::cout << text;
-}
 
-//tar bort alla pengar från kartan efter att en spelare har dött eller förlorat
-void removeMoneyFromMap(char map[21][21], char moneyChar) {
-    for (int i = 0; i < 21; i++) {
-        for (int j = 0; j < 21; j++) {
-            if (map[i][j] == moneyChar) map[i][j] = ' ';
-        }
-    }
-}
+//skriver ut kartan i konsollen
+void printMap(const std::string (*currentMap)[21], int playerX, int playerY, std::string& currentPlayerIcon, std::string defaultPlayerIcon, std::string moneyChar, int visionRange) {
+    currentPlayerIcon = defaultPlayerIcon;
+    std::string printMap = "";
 
-//Kör removeMoneyFromMap en gång för varje karta
-void printNoMoneyOnMap(char map1[21][21], char map2[21][21], char map3[21][21], char moneyChar) {
-    removeMoneyFromMap(map1, moneyChar);
-    removeMoneyFromMap(map2, moneyChar);
-    removeMoneyFromMap(map3, moneyChar);
-}
-
-//ändrar kartorna för att sätta ut pengar på kartan
-void generateMoneyOnMap(char map[21][21], char moneyChar) {
-    for (int i = 0; i < 21; i++) {
-        for (int j = 0; j < 21; j++) {
-            if (map[i][j] == ' ') {
-                int randNum = rand() % 20 + 1;
-                if (randNum == 1) {
-                    
-                    map[i][j] = moneyChar;
-                }
+    for (int y = 0; y < 21; y++) {
+        for (int x = 0; x < 21; x++) {
+            if (y == playerY && x == playerX) {
+                //lägg till färg innan spelarens ikon och återställ efteråt
+                printMap += RED;
+                printMap += currentPlayerIcon;
+                printMap += RESET;
             }
+            else if (currentMap[y][x] == moneyChar) {
+                //kollar avståndet till spelaren med avseende på visionRange mha absolutvärdet för att se om biten av kartan ska skrivas ut
+                if ((abs(y - playerY) <= visionRange) && (abs(x - playerX) <= visionRange)) {       
+                    printMap += YELLOW;         //Ändrar färge till gul
+                    printMap += moneyChar;      //Skriver ut moneyChar
+                    printMap += RESET;          //Ändrar tillbaka färgen
+                }
+                else printMap += " ";           //Om avståndet är för långt så ska ett blanksteg skrivas ut
+            }
+            else if (currentMap[y][x] == "#") {
+                if ((abs(y - playerY) <= visionRange) && (abs(x - playerX) <= visionRange)) {
+                    printMap += BLUE;               //Ändrar färg till blå
+                    printMap += currentMap[y][x];   //Lägger till en bit av kartan på x- och y kordinaterna 
+                    printMap += RESET;              //Återställer färgen 
+                }
+                else printMap += " ";               //Om avståndet är för långt så ska ett blanksteg skrivas ut
+            }
+            //För resterande bitar av kartan skriver den ut inom synhållet
+            else {
+                if ((abs(y - playerY) <= visionRange) && (abs(x - playerX) <= visionRange)) {
+                    printMap += currentMap[y][x];
+                }
+                else printMap += " ";
+            }
+            printMap += " ";
         }
+        printMap += "\n";
     }
-}
-
-//använder en funktion för att ta bort alla pengar om det finns och sedan printa pengar på varje spelplan igen
-void printMoneyOnMap(char map1[21][21], char map2[21][21], char map3[21][21], char moneyChar) {
-    printNoMoneyOnMap(map1, map2, map3, moneyChar);
-    generateMoneyOnMap(map1, moneyChar);
-    generateMoneyOnMap(map2, moneyChar);
-    generateMoneyOnMap(map3, moneyChar);
-}
-
-//funktion för att visa menyn
-void menuPrint(const std::string currentMap[5][2], int playerY, char currentPlayerIcon) {
-
-    std::string text = "Press Enter to select\n";
-    for (int j = 0; j < 6; j++) {
-        if (j == playerY) text += currentPlayerIcon;
-        text += currentMap[j][0];
-        text += currentMap[j][1];
-        text += "\n";
-    }
-    std::cout << text;
-}
-
-//återställer moves, time etc
-void resetStats(int& mapLevel, int& health, std::chrono::time_point<std::chrono::high_resolution_clock>& time, int& moves, double& score) {
-    mapLevel = 1;
-    health = 3;
-    time = std::chrono::high_resolution_clock::now();  // Reset time
-    moves = 0;
-    score = 0;
-}
-
-//återställer positionen för spelaren
-void resetStartPos(int& playerX, int& playerY) {
-    playerX = 1;
-    playerY = 1;
+    //Srkiver ut kartan och flyttar markören till början av konsollen igen
+    std::cout << printMap;
+    std::cout << "\033[H";
 }
 
 //flyttar runt spelaren på spelplanen 
-void mapMove(int& playerX, int& playerY, int& moves, bool& menuOpen, bool& quit, int& mapLevel, int& lives, double& score, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime) {
+void moveMap(int& playerX, int& playerY, int& moves, bool& menuOpen, bool& endConsole, int& mapLevel, int& lives, double& score, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime) {
     if (_kbhit()) {
-        char key = _getch(); //kollar vilken piltangent som blir klickad och lagrar i key
-        switch (key) {
+        char keyPressed = _getch(); //kollar vilken piltangent som blir klickad och lagrar i keyPressed
+        switch (keyPressed) {
         case 72: //upp
             playerY--;
             moves++;
@@ -340,28 +403,55 @@ void mapMove(int& playerX, int& playerY, int& moves, bool& menuOpen, bool& quit,
         case 'e':
             resetStats(mapLevel, lives, startTime, moves, score);
             clearScreen();
-
             menuOpen = true;
             break;
         case 'q':
-            quit = true;
+            endConsole = true;
             break;
         }
     }
 }
 
+
+
+//Lagar menyn i en string mha en for-loop 
+void printMenu(const std::string currentMap[6][2], int playerY, std::string currentPlayerIcon) {
+    std::string text = "Press Enter to select\n";
+    for (int j = 0; j < 6; j++) {
+        if (j == playerY) {
+            text += "\033[38;2;255;105;180m";
+            text += currentPlayerIcon;
+            text += currentMap[j][1];
+            text += "<";
+            text += "\033[0m";
+        }
+        else {
+            text += currentMap[j][1];
+            text += "   ";
+        }
+        text += "\n";
+    }
+    std::cout << text;
+}
+
 //flyttar runt pilen i menyn
-void menuMoveAndMath(const char (*currentMap)[21], int& playerY, int& mapLevel, int lives, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime, int moves, double score, bool& menuOpen, bool& quit, bool& singleMap, bool& shopOpen, bool& difficultyScreenOpen) {
-    char ch = _getch(); //kollar vilken piltangent som blir klickad och lagrar i key
-    switch (ch) {
+void moveMenu(const std::string (*currentMap)[21], int& playerY, int& mapLevel, int lives, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime, int moves, double score, bool& menuOpen, bool& endConsole, bool& singleMap, bool& shopOpen, bool& difficultyScreenOpen) {
+    char keyPressed = _getch(); //kollar vilken piltangent som blir klickad och lagrar i keyPressed
+    switch (keyPressed) {
     case 72: //upp
+        playerY--;
+        break;
+    case 'w':
         playerY--;
         break;
     case 80: //ner
         playerY++;
         break;
+    case 's':
+        playerY++;
+        break;
     case 'q':
-        quit = true;
+        endConsole = true;
         menuOpen = false;
         break;
     case 13: //enter
@@ -369,6 +459,7 @@ void menuMoveAndMath(const char (*currentMap)[21], int& playerY, int& mapLevel, 
             resetStats(mapLevel, lives, startTime, moves, score);
             menuOpen = false;
             difficultyScreenOpen = true;
+            singleMap = false;
             break;
         }
         if (playerY == 1) { //map1
@@ -406,67 +497,12 @@ void menuMoveAndMath(const char (*currentMap)[21], int& playerY, int& mapLevel, 
         }
         if (playerY == 5) {
             menuOpen = false;
-            quit = true; //quit 
+            endConsole = true; //endConsole 
         }
     }
 }
 
-void maxMovesCheck(int& moves, int& mapLevel, int& lives, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime, double& score, bool& menuOpen, char map1[21][21], char map2[21][21], char map3[21][21], char moneyChar) {
-    if (300 - moves == 0) {
-        clearScreen();
-        std::cout << "No moves remaining";
-        Sleep(2000);
-        std::cout << "\033[H";
-        resetStats(mapLevel, lives, startTime, moves, score);
-        menuOpen = true;
-        printNoMoneyOnMap(map1, map2, map3, moneyChar);
-    }
-}
 
-
-//skriver ut kartan i konsollen
-void printMap(const char (*currentMap)[21], int playerX, int playerY, char& currentPlayerIcon, char defaultPlayerIcon, char moneyChar, int visionRange) {
-    currentPlayerIcon = defaultPlayerIcon;
-    std::string printMap = "";
-
-    for (int i = 0; i < 21; i++) {
-        for (int j = 0; j < 21; j++) {
-            if (i == playerY && j == playerX) {
-                //lägg till färg innan spelarens ikon och återställ efteråt
-                printMap += RED;
-                printMap += currentPlayerIcon;
-                printMap += RESET;
-            }
-            else if (currentMap[i][j] == moneyChar) {
-                if (((abs(i - playerY) <= visionRange) && (abs(j - playerX) <= visionRange))) {
-                    printMap += YELLOW;
-                    printMap += moneyChar;
-                    printMap += RESET;
-                }
-                else printMap += ' ';
-            }
-            else if (currentMap[i][j] == '#') {
-                if (((abs(i - playerY) <= visionRange) && (abs(j - playerX) <= visionRange))) {
-                    printMap += BLUE;
-                    printMap += currentMap[i][j];
-                    printMap += RESET;
-                }
-                else printMap += ' ';
-            }
-            else {
-                if (((abs(i - playerY) <= visionRange) && (abs(j - playerX) <= visionRange))) {
-                    printMap += currentMap[i][j];
-                }
-                else printMap += ' ';
-            }
-            printMap += ' ';
-        }
-        printMap += '\n';
-    }
-    
-    std::cout << printMap;
-    std::cout << "\033[H";
-}
 
 //funktion för att skriva ut alla kartor
 void printStats(int mapLevel, int lives, int time, int moves, double score, int money) {
@@ -477,20 +513,36 @@ void printStats(int mapLevel, int lives, int time, int moves, double score, int 
     std::cout << "Money: " << money << "\n";
 }
 
+
+
+//kollar om spelaren har nått drag gränsen
+void maxMovesCheck(int& moves, int& mapLevel, int& lives, std::chrono::time_point<std::chrono::high_resolution_clock>& startTime, double& score, bool& menuOpen, std::string map1[21][21], std::string map2[21][21], std::string map3[21][21], std::string moneyChar) {
+    if (300 - moves == 0) {
+        clearScreen();
+        std::cout << "No moves remaining";
+        Sleep(2000);
+        std::cout << "\033[H";
+        resetStats(mapLevel, lives, startTime, moves, score);
+        menuOpen = true;
+        clearMoneyFromMapGlobal(map1, map2, map3, moneyChar);
+    }
+}
+
 //kollar om spelaren går in i väggen
-void wallCheck(const char (*currentMap)[21], int& playerX, int& playerY, int oldX, int oldY, int& lives, char& currentPlayerIcon) {
-    if (currentMap[playerY][playerX] == '#') {
+void wallCheck(const std::string (*currentMap)[21], int& playerX, int& playerY, int oldX, int oldY, int& lives) {
+    if (currentMap[playerY][playerX] == "#") {
         playerX = oldX;
         playerY = oldY;
         lives--;
-        currentPlayerIcon = 'x';
     }
 }
 
 //kollar om spelaren står på en peng
-void moneyCheck(int playerX, int playerY, char moneyChar, int& money, char map1[21][21], char map2[21][21], char map3[21][21], int mapLevel, int visionRange) {
+void moneyCheck(int playerX, int playerY, std::string moneyChar, int& money, std::string map1[21][21], std::string map2[21][21], std::string map3[21][21], int mapLevel, int visionRange) {
+    //Kollar för varje karta om spelaren står på en peng 
     if (mapLevel == 1) {
         if (map1[playerY][playerX] == moneyChar) {
+            //Adderar pengar beroende på svårhetsgrad
             if (visionRange == 21) {
                 money++;
             }
@@ -506,10 +558,10 @@ void moneyCheck(int playerX, int playerY, char moneyChar, int& money, char map1[
             else if (visionRange == 0) {
                 money += 5;
             }
-            map1[playerY][playerX] = ' ';
+            map1[playerY][playerX] = " ";
         }
     }
-    else if (mapLevel == 2) {
+    if (mapLevel == 2) {
         if (map2[playerY][playerX] == moneyChar) {
             if (visionRange == 21) {
                 money++;
@@ -526,10 +578,10 @@ void moneyCheck(int playerX, int playerY, char moneyChar, int& money, char map1[
             else if (visionRange == 0) {
                 money += 5;
             }
-            map2[playerY][playerX] = ' ';
+            map2[playerY][playerX] = " ";
         }
     }
-    else if (mapLevel == 3) {
+    if (mapLevel == 3) {
         if (map3[playerY][playerX] == moneyChar) {
             if (visionRange == 21) {
                 money++;
@@ -546,104 +598,109 @@ void moneyCheck(int playerX, int playerY, char moneyChar, int& money, char map1[
             else if (visionRange == 0) {
                 money += 5;
             }
-            map3[playerY][playerX] = ' ';
+            map3[playerY][playerX] = " ";
         }
     }
 }
 
 int main() {
-    std::cout << "\033[?25l";
+    std::cout << "\033[?25l"; //gör markören osynlig
     srand(time(0));
-    int visionRange = 21;
-    int maxMoves = 300;
-    int playerX = 1, playerY = 1;
-    int mapLevel = 1;
-    int lives = 3;
-    int moves = 0;
-    int oldX = playerX, oldY = playerY;
-    int money = 0;
-    double score = 0;
+    int visionRange = 21;                       //Så långt spelaren ska se för varje svårhetsgrad
+    int maxMoves = 300;                         //Max antal drag
+    int playerX = 1, playerY = 1;               //Startkoordinater för spelaren
+    int mapLevel = 1;                           //Vilken map som spelaren ska köra
+    int lives = 3;                              //Antal liv
+    int moves = 0;                              //Antal drag
+    int oldX = playerX, oldY = playerY;         //Sparar de gamla koordinaterna
+    int money = 0;                              //Mängd Pengar
+    double score = 0;                           //Antal poäng som visas efter spelet är slut
+    //Klocka sparas i tre variabler 
     auto startTime = std::chrono::high_resolution_clock::now();
     auto endTime = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
-    bool menuOpen = true;
-    bool shopOpen = false;
-    bool difficultyScreenOpen = false;
-    bool quit = false;
-    bool singleMap = false;
-    char currentPlayerIcon = 'o';
-    char defaultPlayerIcon = 'o';
-    char moneyChar = '$';
-    const char (*currentMap)[21] = map1; //använder en pekare för att kunna använda currentMap för flera kartor
 
-    //evighetsloop som kör spelet
+    bool menuOpen = true;                       //Bool för om menyn ska vara öppen
+    bool shopOpen = false;                      //Bool för om shoppen ska vara öppen
+    bool difficultyScreenOpen = false;          //Bool för om difficulty skärmen ska vara öppen
+    bool endConsole = false;                    //Bool för om spelet och konsollen ska avslutas 
+    bool singleMap = false;                     //Bool för om bara en karta ska köras i taget
+    std::string currentPlayerIcon = "o";        //Den för den nuvarande spelarikonen
+    std::string defaultPlayerIcon = "o";        //Den valda  spelarikonen, ändras i shoppen
+    std::string moneyChar = "$";                //Ikon för hur pengarna ska se ut
+    const std::string (*currentMap)[21] = map1; //använder en pekare för att kunna använda currentMap för flera kartor
+
+    //evighetsloop som kör spelet och som gör att man kan spela flera rundor
     while (true) {
-        oldX = playerX;
+        oldX = playerX;         //Sätter oldX och oldY till spelarkoordinaterna igen efter varje gång hela koden körs
         oldY = playerY;
 
+        //Tre if-satser som kollar vilken meny som ska vara öppen
+
         if (difficultyScreenOpen == true) {
-            clearScreen();
-            currentPlayerIcon = '>';
+            clearScreen();                  //tar bord föregående text och ändrar pekaren
+            currentPlayerIcon = ">";
             std::cout << "\033[H";
             playerY = 0;
-            while (difficultyScreenOpen == true) {
+            
+            while (difficultyScreenOpen == true) {      //kör en loop för att gå upp och ner i menyn tills ett alternativ blir valt
                 oldY = playerY;
                 printDifficultyScreen(difficultyArr, playerY, currentPlayerIcon);
-                moveDifficultyScreen(playerY, difficultyScreenOpen, visionRange, menuOpen, shopOpen);
-                if (playerY < 0) playerY = oldY;
-                if (playerY > 4) playerY = oldY;
+                moveDifficultyScreen(playerY, difficultyScreenOpen, visionRange, menuOpen, shopOpen, endConsole);
+                if (playerY < 0 || playerY > 4) playerY = oldY;
                 std::cout << "\033[H";
             }
-            resetStartPos(playerX, playerY);
-
+            //återställer värden och startar klockan för att spelet ska börja
             currentPlayerIcon = defaultPlayerIcon;
             system("cls");
             closeAll(menuOpen, shopOpen, difficultyScreenOpen);
             resetStats(mapLevel, lives, startTime, moves, score);
             resetStartPos(playerX, playerY);
             startTime = std::chrono::high_resolution_clock::now();
-            printMoneyOnMap(map1, map2, map3, moneyChar);
+            printMoneyOnMapGobal(map1, map2, map3, moneyChar);
         }
+
         //om shoppen ska öppnas körs koden för shoppen
         if (shopOpen == true) {
+            //tar bord föregående text och ändrar pekaren
             clearScreen();
-            currentPlayerIcon = '>';
+            currentPlayerIcon = ">";
             std::cout << "\033[H";
             playerY = 0;
+            //loop som gör shoppen tills ett alternativ väljs
             while (shopOpen == true) {
                 oldY = playerY;
-
                 printShop(shopArr, playerY, currentPlayerIcon, money);
-                shopMove(playerY, money, shopOpen, defaultPlayerIcon);
+                moveShop(playerY, money, shopOpen, defaultPlayerIcon);
                 //om pilen går out of bounds på menyn ska pilen flyttas tillbaka till gamla positionen
 
-                if (playerY < 0) playerY = oldY;
-                if (playerY > 2) playerY = oldY;
+                if (playerY < 0 || playerY > 2) playerY = oldY;
                 std::cout << "\033[H";
             }
+            //återställer värden och ikon 
             resetStartPos(playerX, playerY);
-
             currentPlayerIcon = defaultPlayerIcon;
             clearScreen();
-            shopOpen = false;
+            closeAll(menuOpen, shopOpen, difficultyScreenOpen);
             menuOpen = true;
-            difficultyScreenOpen = false;
         }
 
-        //när menyn ska vara öppen körs en del av koden som bara är till för menyn
-        if (menuOpen == true) {
-            clearScreen();
+        
+        if (menuOpen == true) {             //när menyn ska vara öppen körs en del av koden som bara är till för menyn
+            clearScreen();                  //tar bord föregående text och ändrar pekaren
             currentPlayerIcon = '>';
             std::cout << "\033[H";
             playerY = 0;
 
-            while (menuOpen == true) {
-                oldY = playerY;
+           
+            while (menuOpen == true) {      //Kör menyn tills annat anges
+                oldY = playerY;             //Skriver ut och flyttar runt menyn
+                
+                printMenu(menuArr, playerY, currentPlayerIcon);
+                moveMenu(currentMap, playerY, mapLevel, lives, startTime, moves, score, menuOpen, endConsole, singleMap, shopOpen, difficultyScreenOpen);
 
-                menuPrint(menuArr, playerY, currentPlayerIcon);
-                menuMoveAndMath(currentMap, playerY, mapLevel, lives, startTime, moves, score, menuOpen, quit, singleMap, shopOpen, difficultyScreenOpen);
-
-                if (mapLevel == 1) {
+                
+                if (mapLevel == 1) {        //Kollar vilken mapLevel som väljs och pekar currentMap till den arrayen
                     currentMap = map1;
                 }
                 else if (mapLevel == 2) {
@@ -652,31 +709,29 @@ int main() {
                 else if (mapLevel == 3) {
                     currentMap = map3;
                 }
-                if (quit == true) return 0;
+                if (endConsole == true) return 0;
 
-                //om pilen går out of bounds på menyn ska pilen flyttas tillbaka till gamla positionen
-                if (playerY < 0) playerY = oldY;
-                if (playerY > 5) playerY = oldY;
+                if (playerY < 0 || playerY > 5) playerY = oldY;    //Om pilen går out of bounds på menyn ska pilen flyttas tillbaka till gamla positionen
                 std::cout << "\033[H";
             }
         }
 
         
 
-        //kollar om en tangent trycks annars fortsätter programmet
-        mapMove(playerX, playerY, moves, menuOpen, quit, mapLevel, lives, score, startTime);
+        //Kollar om en tangent trycks för att flytta spelaren annars fortsätter programmet
+        moveMap(playerX, playerY, moves, menuOpen, endConsole, mapLevel, lives, score, startTime);
 
-        //gör så att om en spelaren inte kan gå in i väggen genom att flytta tillbaka honom till den gamla positionen
-        wallCheck(currentMap, playerX, playerY, oldX, oldY, lives, currentPlayerIcon);
+        //Gör så att om en spelaren inte kan gå in i väggen genom att flytta tillbaka honom till den gamla positionen
+        wallCheck(currentMap, playerX, playerY, oldX, oldY, lives);
 
-        //money check
+        //Kollar om positionen av spelaren är samma som en peng och då uppdaterar pengar och tar bort den från kartan
         moneyCheck(playerX, playerY, moneyChar, money, map1, map2, map3, mapLevel, visionRange);
 
-        //räknar tiden 
+        //Räknar tiden 
         endTime = std::chrono::high_resolution_clock::now();
         duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
 
-        //skriver ut spelplanen
+        //Kollar om ingen annan meny ska vara öppen och då skriver ut spelplanen 
         if ((menuOpen == false) && (shopOpen == false) && (difficultyScreenOpen == false)) {
             Sleep(10);
             std::cout << "\033[H";
@@ -684,7 +739,7 @@ int main() {
             printMap(currentMap, playerX, playerY, currentPlayerIcon, defaultPlayerIcon, moneyChar, visionRange);
         }
 
-        //om tiden når 100 ska spelet avslutas
+        //Om tiden når gränsen (100 sekunder) ska spelet avslutas
         if (duration.count() > 100) {
             clearScreen();
             std::cout << "Times up!";
@@ -694,12 +749,12 @@ int main() {
             menuOpen = true;
         }
 
-        //om quit = true ska programmet avslutas
-        if (quit == true) {
+        //Om endConsole = true ska programmet avslutas
+        if (endConsole == true) {
             return 0;
         }
 
-        //spelet avslutar om lives blir 0 och återställer statsen för spelaren 
+        //Spelet avslutar om lives blir 0 och återställer statsen för spelaren och därefter öppnar menyn
         if (lives == 0) {
             clearScreen();
             std::cout << "You lost!";
@@ -709,21 +764,26 @@ int main() {
             difficultyScreenOpen = false;
             menuOpen = true;
             visionRange = 21;
-            printNoMoneyOnMap(map1, map2, map3, moneyChar);
+            clearMoneyFromMapGlobal(map1, map2, map3, moneyChar);
         }
 
+        //kollar så att spelaren inte går över drag gränsen
         maxMovesCheck(moves, mapLevel, lives, startTime, score, menuOpen, map1, map2, map3, moneyChar);
 
-        //om spelaren når 'E' exit så blir det nästa karta
+        //om spelaren når 'E' exit under singleMap så ska menyn öppnas
         if (singleMap == true) {
-            if (mapLevel == 2) {
+            if (mapLevel == 1) {
+                currentMap = map1;
+            }
+            else if (mapLevel == 2) {
                 currentMap = map2;
 
             }
             else if (mapLevel == 3) {
                 currentMap = map3;
             }
-            if (currentMap[playerY][playerX] == 'E') {
+            //När spelaren når exit stängs spelet av och öppnar menyn
+            if (currentMap[playerY][playerX] == "E") {
                 clearScreen();
                 menuOpen = true;
                 resetStats(mapLevel, lives, startTime, moves, score);
@@ -732,33 +792,51 @@ int main() {
             }
         }
 
-        //kollar om spelaren har nått "exit"
-        if (currentMap[playerY][playerX] == 'E') {
+        //Kollar om spelaren har nått "exit"
+        if (currentMap[playerY][playerX] == "E") {
             mapLevel++;
 
-            //kollar vilken mapLevel spelaren har nått och pekar då på en annan map för currentMap
+            //Kollar vilken mapLevel spelaren har nått och pekar då på en annan map för currentMap
             if (mapLevel == 2) {
+                system("cls");
                 currentMap = map2;
                 clearScreen();
             }
             else if (mapLevel == 3) {
+                system("cls");
                 currentMap = map3;
                 clearScreen();
             }
 
-            //när spelaren når E på sista kartan blir mapLevel 4 och dens positin är på 'E' så spelet ska avslutas med vinnst
-            if (mapLevel > 3 && (currentMap[playerY][playerX] == 'E')) {
+            //när spelaren når E på sista kartan så spelet ska avslutas med vinst
+            if (mapLevel > 3 && (currentMap[playerY][playerX] == "E")) {
                 clearScreen();
                 score = 1000 * ((200 / (double)moves) * (100 / (double)duration.count()));
+
+                //scoren ska multipliceras beroende på svårhetsgrad mha visionRange
+                if (visionRange == 0) {
+                    score = score * 5;
+                }
+                else if (visionRange == 3) {
+                    score = score * 4;
+                }
+                else if (visionRange == 6) {
+                    score = score * 3;
+                }
+                else if (visionRange == 9) {
+                    score = score * 2;
+                }
+                else continue;
+
+                //skriver ut statistik om rundan
                 std::cout << "You won the campaign!" << "\n";
                 std::cout << "It took " << duration.count() << " seconds and " << moves << " moves" << "\n";
-                std::cout << score;
+                std::cout << "You got " << (int)score << " points";
                 Sleep(3000);
                 clearScreen();
                 resetStats(mapLevel, lives, startTime, moves, score);
                 menuOpen = true;
             }
-
             //sätter tillbaka spelaren på startpositionen
             resetStartPos(playerX, playerY);
         }
