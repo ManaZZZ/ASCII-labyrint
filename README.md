@@ -1,4 +1,4 @@
-# ASCII Labyrint
+# ASCII Labyrint - Alwar
 
 ## 1. Sammanfattning
 ASCII labyrint är ett textbaserat spel där en spelare ska ta sig igenom en labyrint. Spelaren kan köra antingen en campaign mode, där man ska ta sig igenom alla kartor på en viss tid eller så kan man köra och träna en karta i taget. Spelet har också en meny för att välja spelläge och en affär där spelaren kan köpa en ikon för pengar den har plockat upp under ett spel..
